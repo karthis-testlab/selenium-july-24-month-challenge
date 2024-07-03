@@ -1,11 +1,13 @@
 package challenge.week01.day03;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,7 +23,17 @@ public class MarutiSuzukiTest {
 	 * TESTCASE: Maruthi Suzuki
 	 * 
 	 * Step 1: Open your preferred web browser.
-	 * Step 2: Go to Maruthi Suzuki's official website "https://www.marutisuzuki.com/"
+	 * Step 2: Go to Maruthi Suzuki's official website "https://www.marutisuzuki.com/".
+	 * Step 3: Click the search icon.
+	 * Step 4: Type "Swift" in the search field and press Enter.
+	 * Step 5: Click on the General Info icon for the Swift product.
+	 * Step 6: Count the number of options in the city dropdown list.
+	 * Step 7: Print the last options in the city dropdown list and select it.
+	 * Step 8: Click on the Safety section.
+	 * Step 9: Print the description under the Safety section.
+	 * Step 10: Click on the Colours section.
+	 * Step 11: Print the currently selected color.
+	 * Step 12: Close the browser.
 	 * 
 	 */
 
@@ -39,7 +51,7 @@ public class MarutiSuzukiTest {
 
 	@AfterMethod
 	public void tearDown() {
-		// driver.close();
+		driver.close();
 	}
 
 	@Test
@@ -50,15 +62,25 @@ public class MarutiSuzukiTest {
 		Select cityDropdwon = new Select(waitAndGetElement(By.id("selectcity1")));
 		int totalCity = cityDropdwon.getOptions().size();
 		int lastCity = totalCity - 1;
-		System.out.println(totalCity);
-		System.out.println(cityDropdwon.getOptions().get(lastCity).getText());
+		System.out.println("Total number of the cities in the city dropdown list: "+totalCity);
+		System.out.println("Last city in the city dropdown list is: "+cityDropdwon.getOptions().get(lastCity).getText());
 		cityDropdwon.selectByIndex(lastCity);
-		waitAndGetElement(By.xpath("//a[normalize-space(text())='SAFETY']")).click();
+		Actions actions = new Actions(driver);
+		actions.moveToElement(waitAndGetElement(By.xpath("//a[normalize-space(text())='SAFETY']")))
+		       .click().perform();
+		System.out.println("The description under the Safety section;");
 		System.out.println(waitAndGetElement("div.safety-dis > p:first-child").getText());
 		System.out.println(waitAndGetElement("div.safety-dis > p:last-child").getText());
-		waitAndGetElement(By.className("backToTop")).click();
-		scrollToElement(waitAndGetElement(By.partialLinkText("COLOURS")));
-		waitAndGetElement(By.partialLinkText("COLOURS")).click();
+		waitAndGetElement(By.className("backToTop")).click();		
+		actions.moveToElement(waitAndGetElement(By.partialLinkText("COLOURS")))
+		       .click().perform();
+		List<WebElement> elements = driver.findElements(By.cssSelector("div[class^='colorName'] > p > span"));
+		for (WebElement element : elements) {
+			if(element.isDisplayed()) {
+				System.out.println("Currently selected color is: "+element.getText());
+				break;
+			}
+		}
 	}
 
 	public WebElement waitAndGetElement(String locator) {
@@ -72,6 +94,10 @@ public class MarutiSuzukiTest {
 	
 	public void scrollToElement(WebElement element) {
 		driver.executeScript("arguments[0].scrollIntoView();", element);
+	}
+	
+	public void scrollToElement(By locator) {
+		driver.executeScript("arguments[0].scrollIntoView();", wait.until(ExpectedConditions.presenceOfElementLocated(locator)));
 	}
 
 }
