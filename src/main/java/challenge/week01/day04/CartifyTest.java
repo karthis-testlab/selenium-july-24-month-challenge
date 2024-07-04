@@ -18,13 +18,13 @@ public class CartifyTest {
 	 * 
 	 * TESTCASE: Verify Adding Floor-Standing Cloth Rack to Cart and Retrieving Subtotal
 	 * 
-	 * > Launch the browser and Load Url as "https://www.cartify.pk"
+	 * > Launch the browser and Load URL as "https://www.cartify.pk"
 	 * > Click on "Shop By Categories"
 	 * > Click on "Cloth Rack" category
 	 * > Click on the "Floor-Standing Clock Rack With Wheels" item
 	 * > Add the item to the cart
 	 * > Click on Add to cart
-	 * > Retrieve the subtotal price
+	 * > Retrieve the "subtotal price"
 	 * > Quit the driver
 	 * 
 	 */
@@ -43,7 +43,7 @@ public class CartifyTest {
 
 	@AfterMethod
 	public void tearDown() {
-		driver.close();
+		driver.quit();
 	}
 	
 	@Test
