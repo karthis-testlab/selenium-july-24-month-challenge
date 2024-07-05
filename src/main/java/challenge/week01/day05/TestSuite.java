@@ -53,7 +53,7 @@ public class TestSuite {
 		waitAndGetElement(By.xpath("//div[starts-with(@class, 'checkbox')]//*[local-name()='svg']")).click();
 		waitAndGetElement(By.xpath("//button[text()='Create My Free Account']")).click();		
 		waitAndGetElement(By.xpath("//*[text()=\"Just a moment! We're getting this page ready\"]"));
-		waitUntilElementInvisible(By.xpath("//*[text()=\"Just a moment! We're getting this page ready\"]"));
+		waitAndGetElement(By.xpath("//h3[text()=\"Let's Confirm Your Email!\"]"));
 	}
 	
 	/**
