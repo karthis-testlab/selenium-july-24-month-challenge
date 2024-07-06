@@ -91,12 +91,12 @@ public class MarutiSuzukiTest {
 			}	
 		
 		} */
-		String text = driver.findElement(By.className("carcolors active-tab")).getText();
+		String text = driver.findElement(By.tagName("small")).getAttribute("class");
 		String[] colors = text.split("-");
-		if(colors.length == 4) {
-			System.out.println("Currently selected car color is: "+colors[1] +" & "+colors[3]);
+		if(colors.length == 5) {
+			System.out.println("Currently selected car color is: "+colors[1]+" & "+colors[colors.length - 1]);
 		} else {
-			System.out.println("Currently selected car color is: "+colors[1]);
+			System.out.println("Currently selected car color is: "+colors[colors.length]);
 		}
 	}
 
