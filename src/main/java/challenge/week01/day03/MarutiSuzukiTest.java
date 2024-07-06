@@ -1,7 +1,7 @@
 package challenge.week01.day03;
 
 import java.time.Duration;
-import java.util.List;
+//import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -56,30 +56,47 @@ public class MarutiSuzukiTest {
 
 	@Test
 	public void vaildateSearchFunctionalityAndProductExplore() {
-		driver.findElement(By.cssSelector("li.headerSearch-btn > img")).click();
-		driver.findElement(By.cssSelector("input[placeholder='Search']")).sendKeys("Swift", Keys.ENTER);
-		waitAndGetElement(By.className("icon-general_info")).click();
-		Select cityDropdwon = new Select(waitAndGetElement(By.id("selectcity1")));
+		//driver.findElement(By.cssSelector("li.headerSearch-btn > img")).click();
+		driver.findElement(By.className("headerSearch-btn")).click();
+		//driver.findElement(By.cssSelector("input[placeholder='Search']")).sendKeys("Swift", Keys.ENTER);
+		driver.findElement(By.name("key")).sendKeys("Swift", Keys.ENTER);
+		//waitAndGetElement(By.className("icon-general_info")).click();
+		driver.findElement(By.className("icon-general_info")).click();
+		//Select cityDropdwon = new Select(waitAndGetElement(By.id("selectcity1")));
+		Select cityDropdwon = new Select(driver.findElement(By.id("selectcity1")));
 		int totalCity = cityDropdwon.getOptions().size();
 		int lastCity = totalCity - 1;
 		System.out.println("Total number of the cities in the city dropdown list: "+totalCity);
 		System.out.println("Last city in the city dropdown list is: "+cityDropdwon.getOptions().get(lastCity).getText());
 		cityDropdwon.selectByIndex(lastCity);
 		Actions actions = new Actions(driver);
-		actions.moveToElement(waitAndGetElement(By.xpath("//a[normalize-space(text())='SAFETY']")))
-		       .click().perform();
+		/* actions.moveToElement(waitAndGetElement(By.xpath("//a[normalize-space(text())='SAFETY']")))
+		       .click().perform(); */
+		actions.moveToElement(driver.findElement(By.partialLinkText("SAFETY")))
+	       .click().perform();
 		System.out.println("The description under the Safety section;");
-		System.out.println(waitAndGetElement("div.safety-dis > p:first-child").getText());
-		System.out.println(waitAndGetElement("div.safety-dis > p:last-child").getText());
-		waitAndGetElement(By.className("backToTop")).click();		
-		actions.moveToElement(waitAndGetElement(By.partialLinkText("COLOURS")))
-		       .click().perform();
-		List<WebElement> elements = driver.findElements(By.cssSelector("div[class^='colorName'] > p > span"));
+	    /* System.out.println(waitAndGetElement("div.safety-dis > p:first-child").getText());
+		System.out.println(waitAndGetElement("div.safety-dis > p:last-child").getText()); */
+		System.out.println(driver.findElement(By.className("caption-text")).getText());
+		// waitAndGetElement(By.className("backToTop")).click();		
+		/* actions.moveToElement(waitAndGetElement(By.partialLinkText("COLOURS")))
+		       .click().perform(); */
+		actions.moveToElement(driver.findElement(By.partialLinkText("COLOURS")))
+	       .click().perform();
+		/* List<WebElement> elements = driver.findElements(By.cssSelector("div[class^='colorName'] > p > span"));
 		for (WebElement element : elements) {
 			if(element.isDisplayed()) {
 				System.out.println("Currently selected color is: "+element.getText());
 				break;
-			}
+			}	
+		
+		} */
+		String text = driver.findElement(By.className("carcolors active-tab")).getText();
+		String[] colors = text.split("-");
+		if(colors.length == 4) {
+			System.out.println("Currently selected car color is: "+colors[1] +" & "+colors[3]);
+		} else {
+			System.out.println("Currently selected car color is: "+colors[1]);
 		}
 	}
 
