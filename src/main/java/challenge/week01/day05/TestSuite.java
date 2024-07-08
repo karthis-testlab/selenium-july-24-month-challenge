@@ -51,7 +51,8 @@ public class TestSuite {
 		waitAndGetElement(By.name("password")).sendKeys("test@123");
 		waitAndGetElement(By.name("confirm")).sendKeys("test@123");
 		waitAndGetElement(By.xpath("//div[starts-with(@class, 'checkbox')]//*[local-name()='svg']")).click();
-		waitAndGetElement(By.xpath("//button[text()='Create My Free Account']")).click();		
+		Actions actions = new Actions(driver);
+		actions.moveToElement(waitAndGetElement(By.xpath("//button[text()='Create My Free Account']"))).click().perform();	
 		waitAndGetElement(By.xpath("//*[text()=\"Just a moment! We're getting this page ready\"]"));
 		waitAndGetElement(By.xpath("//h3[text()=\"Let's Confirm Your Email!\"]"));
 	}
@@ -68,7 +69,7 @@ public class TestSuite {
 	public void testCase02() {
 		driver.get("https://gemini.google.com/");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-		waitAndGetElement("a[aria-label='Sign in']").click();
+		driver.executeScript("arguments[0].click();", waitAndGetElement("a[aria-label='Sign in']"));
 		waitAndGetElement("input[type='email']");
 		System.out.println(driver.getTitle());
 	}
