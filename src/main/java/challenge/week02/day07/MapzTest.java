@@ -47,9 +47,9 @@ public class MapzTest {
 	@Test
 	public void validateTooltipTextInMapzApp() {
 		driver.findElement(By.xpath("//a[normalize-space(text())='Draw']")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("form[action$='login'] > div > div.row.first > div > input")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("form[action$='login'] > div > div.row.first > div")));
 		Actions action = new Actions(driver);
-		action.moveToElement(driver.findElement(By.cssSelector("form[action$='login'] > div > div.row.first > div > input"))).build().perform();
+		action.moveToElement(driver.findElement(By.cssSelector("form[action$='login'] > div > div.row.first > div"))).perform();
 		System.out.println("Tooltip Message: "+driver.findElement(By.cssSelector("form[action$='login'] > div > div.row.first > div > input")).getAttribute("validationMessage"));
 	}
 
