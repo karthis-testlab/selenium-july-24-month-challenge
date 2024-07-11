@@ -12,6 +12,7 @@ import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class CommercejsDemoStoreTest {
@@ -47,14 +48,14 @@ public class CommercejsDemoStoreTest {
 		driver.quit();
 	}
 	
-	@Test
-	public void validateTheGivenProductIsAddedInCart() {
+	@Test(dataProvider = "getData")
+	public void validateTheGivenProductIsAddedInCart(String productName) {
 		driver.findElement(By.linkText("Shop now")).click();
 		driver.findElement(By.xpath("//p[text()='Hair Products']/following-sibling::a")).click();
 		List<WebElement> elements = driver
 				.findElements(By.xpath("//p[@id='hair-products']/following-sibling::div/div/a/p[1]"));
 		for (WebElement element : elements) {
-			if (element.getText().equals("Shampoo & Conditioner Set")) {
+			if (element.getText().equals(productName)) {
 				element.click();
 				break;
 			}
@@ -63,7 +64,12 @@ public class CommercejsDemoStoreTest {
 		driver.findElement(By.xpath("//button/span[.='Add to cart']")).click();
 		driver.findElement(By.className("cart-animation")).click();
 		Assert.assertEquals(waitAndGetElement(By.xpath("(//div[starts-with(@class,'cart-item')]//p)[1]")).getText(),
-				"Shampoo & Conditioner Set");
+				productName);
+	}
+	
+	@DataProvider
+	public String[][] getData() {
+		return new String[][] { { "Shampoo & Conditioner Set" } };
 	}
 	
 	public WebElement waitAndGetElement(By locator) {
