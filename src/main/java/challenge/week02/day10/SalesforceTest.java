@@ -52,7 +52,6 @@ public class SalesforceTest {
 	@AfterMethod
 	public void tearDown(ITestResult result) {
 		driver.executeScript("arguments[0].click();", waitAndGetElement(By.xpath("//parent::div[@class='linkElements']/a[text()='Switch to Lightning Experience']")));
-		waitAndGetElement(By.className("slds-icon-waffle"));
 		driver.close();
 	}
 	
