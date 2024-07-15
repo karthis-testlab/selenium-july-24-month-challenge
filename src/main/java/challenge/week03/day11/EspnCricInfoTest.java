@@ -50,9 +50,13 @@ public class EspnCricInfoTest {
 		
 		waitAndGetElement(By.cssSelector("div#onetrust-close-btn-container > button")).click();
 		
+		inViewport(waitAndGetElement(By.xpath("//h2[text()='Key Series']")));
+		
 		new Actions(driver)
 		.scrollToElement(waitAndGetElement(By.xpath("//h2[text()='Key Series']")))
 		.perform();
+		
+		inViewport(waitAndGetElement(By.xpath("//h2[text()='Key Series']")));
 		
 		waitAndGetElement(By.xpath("//h2[text()='Key Series']/../../following-sibling::div//a[1]")).click();
 		
@@ -65,5 +69,16 @@ public class EspnCricInfoTest {
 	public WebElement waitAndGetElement(By locator) {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
+	
+	private void inViewport(WebElement element) {
+
+        String script =
+                "for(var e=arguments[0],f=e.offsetTop,t=e.offsetLeft,o=e.offsetWidth,n=e.offsetHeight;\n"
+                        + "e.offsetParent;)f+=(e=e.offsetParent).offsetTop,t+=e.offsetLeft;\n"
+                        + "return f<window.pageYOffset+window.innerHeight&&t<window.pageXOffset+window.innerWidth&&f+n>\n"
+                        + "window.pageYOffset&&t+o>window.pageXOffset";
+
+        System.out.println(driver.executeScript(script, element));
+}
 
 }
