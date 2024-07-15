@@ -15,6 +15,19 @@ import org.testng.annotations.Test;
 
 public class EspnCricInfoTest {
 	
+	/**
+	 * 
+	 * Automate the following Test Case using different ways to scroll to an element and interact
+	 * 
+	 * TESTCASE:
+	 * 
+	 * > Launch the browser and Load URL as "https://www.espncricinfo.com/".
+	 * > Click on first result under the Key Series.
+	 * > Print the text of the first resulting add.
+	 * > Quit the driver.
+	 * 
+	 */
+	
 	ChromeDriver driver;
 	WebDriverWait wait;
 
@@ -29,16 +42,23 @@ public class EspnCricInfoTest {
 
 	@AfterMethod
 	public void tearDown(ITestResult result) {		
-		//driver.close();
-	}
+		driver.quit();
+	}	
 	
 	@Test
 	public void scrollTest() {		
+		
+		waitAndGetElement(By.cssSelector("div#onetrust-close-btn-container > button")).click();
+		
 		new Actions(driver)
 		.scrollToElement(waitAndGetElement(By.xpath("//h2[text()='Key Series']")))
 		.perform();
 		
 		waitAndGetElement(By.xpath("//h2[text()='Key Series']/../../following-sibling::div//a[1]")).click();
+		
+		driver.executeScript("arguments[0].scrollIntoView();", waitAndGetElement(By.xpath("//div[@class='feed']//h2[contains(@class,'ds-text-raw-white')]")));
+		
+		System.out.println(waitAndGetElement(By.xpath("//div[@class='feed']//h2[contains(@class,'ds-text-raw-white')]")).getText());
 		
 	}
 	
