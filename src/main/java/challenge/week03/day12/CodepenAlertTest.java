@@ -51,7 +51,7 @@ public class CodepenAlertTest {
 	}
 
 	@Test
-	public void alterTest() {
+	public void validateTheWelcomeTextAndHandleTheAlerts() {
 		try {
 			waitAndGetElement(By.cssSelector("button#view-switcher-button")).click();
 			waitAndGetElement(By.id("left-layout")).click();
