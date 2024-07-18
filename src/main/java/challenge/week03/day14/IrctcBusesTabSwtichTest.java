@@ -14,7 +14,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class WindowSwtichTest {
+public class IrctcBusesTabSwtichTest {
 	
 	/**
 	 * 
@@ -55,7 +55,7 @@ public class WindowSwtichTest {
 	}
 	
 	@Test
-	public void switchWindowTest() {		
+	public void validateBusesTabSwitchAndGetChildPageURL() {		
 		waitAndGetElement(By.xpath("//nav[starts-with(@class,'nav-bar')]/ul[@class='menu']/li/a[normalize-space(text())='BUSES']")).click();		
 		System.out.println("Child Window Handle Value is: "+switchToChildWindow("IRCTC Bus - Online Bus Ticket Booking | Bus Reservation"));
 		System.out.println("Child Window Page URL: "+driver.getCurrentUrl());		
