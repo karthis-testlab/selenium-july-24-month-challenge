@@ -57,11 +57,7 @@ public class ExceptionHandlingTest {
 		} catch (NoSuchFrameException e) {
 			System.err.println("[ERROR]["+new SimpleDateFormat("dd:MM:yyyy:HH:mm:sss").format((new Date()))+"]: This exception indicates that the frame or iframe you are trying to work with is either not present or has been removed, Due to --> "+e.toString());
 		} finally {
-			try {
-				driver.close();
-			} catch (Exception e) {
-				driver.quit();
-			}
+			driver.quit();
 		}
 	}
 
