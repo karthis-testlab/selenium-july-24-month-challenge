@@ -29,7 +29,7 @@ public class ScreenshotTest {
 	 * > Launch the browser.
 	 * > Load the URL as "https://www.codehim.com/demo/single-page-shopping-cart-template/".
 	 * > Select First Image, Click "Add to Cart" and take a Snapshot.
-	 * > Select First Image, Result
+	 * > Select First Image, Result click "View Gallery" and take a Snapshot.
 	 * > Print the current URL of the child window.
 	 * > Quit the browser.
 	 *
