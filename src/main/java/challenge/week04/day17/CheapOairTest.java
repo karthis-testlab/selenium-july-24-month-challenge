@@ -46,7 +46,7 @@ public class CheapOairTest {
 	
 	ChromeDriver driver;
 	WebDriverWait wait;
-	static String pattern = "dd MMMM YYYY";	
+    String pattern = "dd MMMM YYYY";	
 	
 	@BeforeMethod
 	public void setUp() {
