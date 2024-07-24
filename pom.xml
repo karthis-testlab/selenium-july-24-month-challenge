@@ -4,11 +4,11 @@
   <artifactId>selenium-july-month-challenge</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 	<dependencies>
-		<!-- selenium-java-v4.22.0 -->
+		<!-- selenium-java-v4.23.0 -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>4.22.0</version>
+			<version>4.23.0</version>
 		</dependency>
 		<!-- webdrivermanager-v5.9.1 -->
 		<dependency>
