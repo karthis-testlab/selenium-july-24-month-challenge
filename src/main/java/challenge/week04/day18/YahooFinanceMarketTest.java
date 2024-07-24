@@ -14,7 +14,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class YahooFinanceMarketTest {
+public class YahooFinanceMarketTest {	
 	
 	/**
 	 * Read the respective value from the web table for given input
@@ -118,7 +118,6 @@ public class YahooFinanceMarketTest {
 	
 	public WebElement getParticularRowInMarketTable(int index) {
 		return driver.findElements(By.xpath("//table[starts-with(@class,'markets-table')]/tbody/tr")).get(index);
-	}
-	
+	}	
 
 }
