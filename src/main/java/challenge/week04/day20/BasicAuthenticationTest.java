@@ -18,6 +18,12 @@ import org.testng.annotations.Test;
 
 public class BasicAuthenticationTest {
 	
+	/**
+	 * 
+	 *
+	 * 
+	 */
+	
 	ChromeDriver driver;
 	WebDriverWait wait;
 	
