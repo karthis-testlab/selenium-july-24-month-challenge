@@ -16,11 +16,18 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class BasicAuthenticationTest {
+public class HerokuappBasicAuthenticationTest {
 	
 	/**
 	 * 
-	 *
+	 * Handling Basic Authentication Using Selenium
+	 * 
+	 * TESTCASE:
+	 * 
+	 * > Open your preferred web browser
+	 * > Navigate to the URL "https://the-internet.herokuapp.com/basic_auth"
+	 * > Need to handle the Authentication username "admin" password "admin"
+	 * > Print the title of the web page to the console
 	 * 
 	 */
 	
@@ -43,14 +50,14 @@ public class BasicAuthenticationTest {
 	@Test
 	public void testBasicAuthenticationHandingThroughDevTools() {
 		basicAuthUsingDevTools("admin", "admin");
-		driver.get("https://the-internet.herokuapp.com/basic_auth");
+		driver.navigate().to("https://the-internet.herokuapp.com/basic_auth");
 		System.out.println(driver.findElement(By.cssSelector("div.example > h3")).getText());
 		System.out.println(driver.findElement(By.cssSelector("div.example > p")).getText());
 	}
 	
 	@Test
 	public void testBasicAuthenticationThroughUrl() {
-		driver.get(basicAuthPassingInUrl("the-internet.herokuapp.com/basic_auth", "admin", "admin"));
+		driver.get(basicAuthPassingInUrl("https", "the-internet.herokuapp.com/basic_auth", "admin", "admin"));
 		System.out.println(driver.findElement(By.cssSelector("div.example > h3")).getText());
 		System.out.println(driver.findElement(By.cssSelector("div.example > p")).getText());
 	}
@@ -66,8 +73,8 @@ public class BasicAuthenticationTest {
 		devTools.send(Network.setExtraHTTPHeaders(new Headers(heardes)));
 	}
 	
-	public String basicAuthPassingInUrl(String uri, String userName, String password) {
-		return "https://"+userName+":"+password+"@"+uri;
+	public String basicAuthPassingInUrl(String protocol, String uri, String userName, String password) {
+		return protocol+"://"+userName+":"+password+"@"+uri;
 	}
 
 }
