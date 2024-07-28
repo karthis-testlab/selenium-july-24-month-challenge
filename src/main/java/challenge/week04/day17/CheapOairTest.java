@@ -10,6 +10,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -23,7 +24,7 @@ public class CheapOairTest {
 	
 	/**
 	 * 
-	 * Automate The Test Case For Selecting Tomorrow's Date From The Clander
+	 * Automate The Test Case For Selecting Tomorrow's Date From The Calendar
 	 * 
 	 * TEST STEPS:
 	 * 
@@ -50,7 +51,9 @@ public class CheapOairTest {
 	
 	@BeforeMethod
 	public void setUp() {
-		driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--disable-search-engine-choice-screen");
+		driver = new ChromeDriver(options);
 		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		driver.manage().window().maximize();
 		driver.get("https://www.cheapoair.com/");
@@ -69,15 +72,14 @@ public class CheapOairTest {
 		driver.findElement(By.xpath("//input[starts-with(@id,'from')]")).click();
 		driver.findElement(By.xpath("//input[starts-with(@id,'from')]")).sendKeys(Keys.DELETE);
 		driver.findElement(By.xpath("//input[starts-with(@id,'from')]")).sendKeys("MAA");
-		driver.findElement(By.xpath("//input[starts-with(@id,'from')]/../section[@class='suggestion-box']//ul/li[@data-suggestion][1]")).click();		
+		driver.executeScript("arguments[0].click();", driver.findElement(By.xpath("//input[starts-with(@id,'from')]/../section[@class='suggestion-box']//ul/li[@data-suggestion][1]")));	
 		driver.findElement(By.xpath("//input[starts-with(@id,'to')]")).sendKeys(Keys.CONTROL,"a",Keys.DELETE);
 		driver.findElement(By.xpath("//input[starts-with(@id,'to')]")).sendKeys("DXB");
-		driver.findElement(By.xpath("//input[starts-with(@id,'to')]/../section[@class='suggestion-box']//ul/li[@data-suggestion][1]")).click();	
-		new Actions(driver).moveToElement(driver.findElement(By.xpath("//a[@aria-label='"+fetchTomorrowsDate()+"']")))
-		.click().perform();
+		driver.executeScript("arguments[0].click();", driver.findElement(By.xpath("//input[starts-with(@id,'to')]/../section[@class='suggestion-box']//ul/li[@data-suggestion][1]")));
+		driver.executeScript("arguments[0].click();", driver.findElement(By.xpath("//a[@aria-label='"+fetchTomorrowsDate()+"']")));
 		driver.findElement(By.id("travellerButton")).click();
 		driver.findElement(By.id("addseniors")).click();
-		driver.findElement(By.id("closeDialog")).click();
+		new Actions(driver).moveToElement(driver.findElement(By.id("closeDialog"))).click().perform();
 		driver.findElement(By.id("searchNow")).click();
 		driver.findElement(By.cssSelector("a.close-icon")).click();	       
 	    System.out.println("The lowest price for the "+fetchTomorrowsDate()+" is: "+fecthLowestPrice());

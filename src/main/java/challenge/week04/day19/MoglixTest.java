@@ -79,7 +79,7 @@ public class MoglixTest {
 		}
 		waitAndGetElement(By.cssSelector("div[class^='cartNotification']")).findElement(By.linkText("VIEW CART")).click();
 		Assert.assertEquals(Integer.parseInt(removeDecimalPointAndSpecialChar(waitAndGetElement(By.xpath("//span[text()='Amount Payable']/following-sibling::span")).getText())), prices.get(0));
-		System.out.println("Total Payment is: "+waitAndGetElement(By.xpath("//span[text()='Total Amount']/following-sibling::span")).getText());
+		System.out.println("Total Amount is: "+waitAndGetElement(By.xpath("//span[text()='Total Amount']/following-sibling::span")).getText());
 		System.out.println("Total GST is: "+waitAndGetElement(By.xpath("//span[text()='Total GST']/following-sibling::span")).getText());
 		System.out.println("Total Shipping is: "+waitAndGetElement(By.xpath("//span[text()='Total Shipping']/following-sibling::span")).getText());
 		System.out.println("Total Coupon Discount is: "+waitAndGetElement(By.xpath("//span[text()='Total Coupon Discount']/following-sibling::span")).getText());
