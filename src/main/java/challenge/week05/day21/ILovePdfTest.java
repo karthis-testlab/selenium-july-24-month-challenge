@@ -10,14 +10,27 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class UploadSeleniumTest {
+public class ILovePdfTest {
+	
+	/**
+	 * 
+	 * Automate the following test case for using file upload
+	 * 
+	 * TESTCASE:
+	 * 
+	 * > Open your preferred web browser.
+	 * > Go to the I Love pdf official website "https://www.ilovepdf.com/"
+	 * > Click the PDF to Word
+	 * > Click the Select PDF
+	 * > Upload your PDF file
+	 * 
+	 */
 	
 	ChromeDriver driver;
 	WebDriverWait wait;
@@ -28,7 +41,7 @@ public class UploadSeleniumTest {
 		options.addArguments("--disable-search-engine-choice-screen");
 		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
-		driver.get("https://the-internet.herokuapp.com/upload");
+		driver.get("https://www.ilovepdf.com/");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 	}
 	
@@ -37,23 +50,23 @@ public class UploadSeleniumTest {
 		driver.quit();
 	}
 	
-	@Test
+    @Test
 	public void testUploadFileUsingSendKeys() {		
-		uploadFileUsingSendKeys(System.getProperty("user.dir")+"/images/telerik-contact-success.png");
-		driver.findElement(By.id("file-submit")).click();
-		Assert.assertEquals(driver.findElement(By.id("uploaded-files")).getText().trim(), "telerik-contact-success.png");
+		driver.findElement(By.cssSelector("a[title='PDF to Word']")).click();
+		uploadFileUsingSendKeys(System.getProperty("user.dir")+"/upload/SoftwareTesting.pdf");		
+		Assert.assertEquals(driver.findElement(By.cssSelector("span.file__info__name")).getText().trim(), "SoftwareTesting.pdf");
 	}
 	
 	@Test
 	public void testUploadFileUsingRobotClass() {
-		new Actions(driver).moveToElement(driver.findElement(By.id("file-upload"))).click().perform();
-		uploadFileUsigRobotClass(System.getProperty("user.dir")+"\\images\\telerik-contact-success.png");
-		driver.findElement(By.id("file-submit")).click();
-		Assert.assertEquals(driver.findElement(By.id("uploaded-files")).getText().trim(), "telerik-contact-success.png");
+		driver.findElement(By.cssSelector("a[title='PDF to Word']")).click();
+		driver.findElement(By.linkText("Select PDF file")).click();
+		uploadFileUsigRobotClass(System.getProperty("user.dir")+"\\upload\\SoftwareTesting.pdf");		
+		Assert.assertEquals(driver.findElement(By.cssSelector("span.file__info__name")).getText().trim(), "SoftwareTesting.pdf");
 	}	
 	
 	public void uploadFileUsingSendKeys(String filePath) {
-		driver.findElement(By.id("file-upload")).sendKeys(filePath);		
+		driver.findElement(By.xpath("//div[text()='or drop PDF here']/following-sibling::div/input")).sendKeys(filePath);	
 	}
 	
 	public void uploadFileUsigRobotClass(String filePath) {		
