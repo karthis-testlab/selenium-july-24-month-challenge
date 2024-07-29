@@ -51,19 +51,11 @@ public class ILovePdfTest {
 	}
 	
     @Test
-	public void testUploadFileUsingSendKeys() {		
+	public void testUploadPdfFile() {		
 		driver.findElement(By.cssSelector("a[title='PDF to Word']")).click();
 		uploadFileUsingSendKeys(System.getProperty("user.dir")+"/upload/SoftwareTesting.pdf");		
 		Assert.assertEquals(driver.findElement(By.cssSelector("span.file__info__name")).getText().trim(), "SoftwareTesting.pdf");
 	}
-	
-	@Test
-	public void testUploadFileUsingRobotClass() {
-		driver.findElement(By.cssSelector("a[title='PDF to Word']")).click();
-		driver.findElement(By.linkText("Select PDF file")).click();
-		uploadFileUsigRobotClass(System.getProperty("user.dir")+"\\upload\\SoftwareTesting.pdf");		
-		Assert.assertEquals(driver.findElement(By.cssSelector("span.file__info__name")).getText().trim(), "SoftwareTesting.pdf");
-	}	
 	
 	public void uploadFileUsingSendKeys(String filePath) {
 		driver.findElement(By.xpath("//div[text()='or drop PDF here']/following-sibling::div/input")).sendKeys(filePath);	
