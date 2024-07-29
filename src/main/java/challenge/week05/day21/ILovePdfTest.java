@@ -51,12 +51,20 @@ public class ILovePdfTest {
 	}
 	
     @Test
-	public void testUploadPdfFile() {		
+	public void testUploadPdfFileUsingSendKeys() {		
 		driver.findElement(By.cssSelector("a[title='PDF to Word']")).click();
 		uploadFileUsingSendKeys(System.getProperty("user.dir")+"/upload/SoftwareTesting.pdf");		
 		Assert.assertEquals(driver.findElement(By.cssSelector("span.file__info__name")).getText().trim(), "SoftwareTesting.pdf");
 	}
 	
+    @Test
+	public void testUploadPdfFileUsingRobotClass() {		
+		driver.findElement(By.cssSelector("a[title='PDF to Word']")).click();
+		driver.findElement(By.linkText("Select PDF file")).click();
+		uploadFileUsigRobotClass(System.getProperty("user.dir")+"\\upload\\SoftwareTesting.pdf");		
+		Assert.assertEquals(driver.findElement(By.cssSelector("span.file__info__name")).getText().trim(), "SoftwareTesting.pdf");
+	}
+    
 	public void uploadFileUsingSendKeys(String filePath) {
 		driver.findElement(By.xpath("//div[text()='or drop PDF here']/following-sibling::div/input")).sendKeys(filePath);	
 	}
@@ -68,8 +76,8 @@ public class ILovePdfTest {
 			StringSelection file_to_upload = new StringSelection(filePath);
 			Toolkit.getDefaultToolkit().getSystemClipboard().setContents(file_to_upload, null);			
 			robot.keyPress(KeyEvent.VK_CONTROL);
-			robot.keyPress(KeyEvent.VK_V);			
-			robot.keyPress(KeyEvent.VK_ENTER);		
+			robot.keyPress(KeyEvent.VK_V);
+			robot.keyPress(KeyEvent.VK_ENTER);
 		} catch (AWTException e) {
 			e.printStackTrace();
 		}
