@@ -40,6 +40,14 @@ public class PolymerWebSiteShadowDomTest {
 	 * 
 	 */
 	
+	/*
+	 *  Use below script to check locator correctness in the chrome devtools
+	 *  
+	 *  Open console tab in the devtools and run below code in
+	 *  document.querySelector('shop-app[page="home"]').shadowRoot.querySelector()
+	 */
+	
+	
 	ChromeDriver driver;
 	WebDriverWait wait;
 	
